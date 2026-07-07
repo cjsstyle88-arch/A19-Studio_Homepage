@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A19 Studio - 실력으로 말하는 원목 수제 가구">
+  <title>A19 Studio | 원목 수제 가구</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ink: #111111;
+      --paper: #ffffff;
+      --line: #e2e2e2;
+      --muted: #767676;
+      --navy: #2B3A4E;
+      --orange: #C67B3C;
+      --cream: #F7F3EE;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background-color: var(--paper);
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .kicker {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ===== 헤더 ===== */
+    header {
+      background-color: var(--paper);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.4rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+    }
+
+    .brand-tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    /* ===== 히어로 섹션 ===== */
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 6rem 2rem 5rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.4vw, 3.4rem);
+      color: var(--ink);
+      margin-bottom: 2rem;
+      line-height: 1.3;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    .hero-accent {
+      color: var(--orange);
+    }
+
+    /* ===== 공용 섹션 헤더 ===== */
+    .section-head {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem 2rem 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ===== 갤러리 ===== */
+    .gallery {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .gallery-item {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background-color 0.25s ease;
+    }
+
+    .gallery-item:hover {
+      background-color: var(--cream);
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-index {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .gallery-icon {
+      font-size: 2.2rem;
+      opacity: 0.55;
+      filter: grayscale(1);
+    }
+
+    .gallery-content {
+      padding: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .gallery-title {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+
+    .gallery-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ===== 작가 이야기 섹션 ===== */
+    .about {
+      background-color: var(--cream);
+      padding: 5rem 2rem;
+    }
+
+    .about-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3rem;
+    }
+
+    .about-content .section-title {
+      padding: 0;
+    }
+
+    .story {
+      border-left: 1px solid var(--ink);
+      padding-left: 2.5rem;
+      line-height: 2;
+      font-size: 1.05rem;
+      color: var(--ink);
+    }
+
+    .story p {
+      margin-bottom: 1.6rem;
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ===== 강점 섹션 ===== */
+    .values {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0;
+      border-top: 1px solid var(--line);
+      margin-top: 2.5rem;
+    }
+
+    .value-card {
+      padding: 2.5rem 2rem 2.5rem 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .value-card:last-child {
+      border-right: none;
+    }
+
+    .value-number {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .value-card h3 {
+      color: var(--ink);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .value-card p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.92rem;
+    }
+
+    .value-quote {
+      color: var(--ink);
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+
+    /* ===== 공지사항 섹션 ===== */
+    .notices {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .notices-list {
+      border-top: 1px solid var(--line);
+      margin-top: 2.5rem;
+    }
+
+    .notice-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .notice-main {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .notice-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    .notice-body {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .notice-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .notices-empty {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 2rem 0;
+    }
+
+    /* ===== 문의하기 섹션 ===== */
+    .inquiry {
+      background-color: var(--cream);
+      padding: 5rem 2rem;
+    }
+
+    .inquiry-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .inquiry-form {
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-top: 2.5rem;
+    }
+
+    .inquiry-form input,
+    .inquiry-form textarea {
+      border: 1px solid var(--line);
+      background-color: var(--paper);
+      color: var(--ink);
+      padding: 0.9rem 1rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .inquiry-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .inquiry-form .hidden-field {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .btn-dark {
+      background-color: var(--ink);
+      color: var(--paper);
+      border: 1px solid var(--ink);
+      align-self: flex-start;
+    }
+
+    .btn-dark:hover {
+      background-color: transparent;
+      color: var(--ink);
+    }
+
+    .inquiry-success {
+      display: none;
+      margin-top: 1.5rem;
+      font-size: 0.92rem;
+      color: var(--ink);
+    }
+
+    /* ===== 연락처 섹션 ===== */
+    .contact {
+      background-color: var(--ink);
+      color: var(--paper);
+      padding: 6rem 2rem;
+    }
+
+    .contact-content {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .contact h2 {
+      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .contact p {
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      color: #bbb;
+      max-width: 480px;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.95rem 2rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-weight: 700;
+      border: 1px solid var(--paper);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--orange);
+      color: var(--ink);
+      border-color: var(--orange);
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--paper);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--paper);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--paper);
+      color: var(--ink);
+    }
+
+    /* ===== 푸터 ===== */
+    footer {
+      background-color: var(--paper);
+      color: var(--muted);
+      padding: 1.6rem 2rem;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.2rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--ink);
+    }
+
+    /* ===== 반응형 ===== */
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .story {
+        padding-left: 1.5rem;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        padding: 2rem 0;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .value-card:last-child {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-inner {
+        padding: 1.1rem 1.2rem;
+      }
+
+      .hero {
+        padding: 3.5rem 1.2rem 3rem;
+      }
+
+      .section-head {
+        padding: 3.5rem 1.2rem 0;
+      }
+
+      .gallery {
+        padding: 2rem 1.2rem 3.5rem;
+      }
+
+      .about {
+        padding: 3.5rem 1.2rem;
+      }
+
+      .values {
+        padding: 3.5rem 1.2rem;
+      }
+
+      .contact {
+        padding: 4rem 1.2rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        margin-top: 0.4rem;
+      }
+
+      .footer-links a {
+        margin-left: 0;
+        margin-right: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-name">A19 STUDIO</div>
+      <div class="brand-tagline">실력으로 말하는 원목 수제 가구</div>
+    </div>
+  </header>
+
+  <!-- 히어로 섹션 -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="kicker">A19 Studio — Custom Woodwork</span>
+      <h1>안정 대신 몰입을 택하고,<br>나무 속에서 오직 '<span class="hero-accent">실력</span>'이라는 본질만을 좇는 가구 브랜드</h1>
+      <p>화려한 스토리나 유행이 아닌, 오직 <strong>만든 것</strong>으로만 말한다.</p>
+    </div>
+  </section>
+
+  <!-- 갤러리 -->
+  <div class="section-head">
+    <h2 class="section-title">대표 작품</h2>
+    <span class="section-note">Selected Works</span>
+  </div>
+  <section class="gallery">
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- content/gallery.json 에서 자동으로 채워집니다 -->
+    </div>
+  </section>
+
+  <!-- 공지사항 -->
+  <div class="section-head">
+    <h2 class="section-title">공지사항</h2>
+    <span class="section-note">Notice</span>
+  </div>
+  <section class="notices">
+    <div class="notices-list" id="notices-list">
+      <!-- content/notices.json 에서 자동으로 채워집니다 -->
+    </div>
+  </section>
+
+  <!-- 작가 이야기 -->
+  <section class="about">
+    <div class="about-content">
+      <div>
+        <span class="kicker">Our Story</span>
+        <h2 class="section-title">작가 이야기</h2>
+      </div>
+      <div class="story">
+        <p>8년간 화학공장의 안전관리자로 살았다.<br>직급이 올라갈수록 요구는 많아졌고, 책임만 완수하는 삶이 되었다.<br>공부해야 한다는 걸 알면서도 할 힘이 남지 않았다.</p>
+
+        <p>우연히 본 한 영상이 모든 걸 바꿨다.<br>불에 그을린 나무와 에폭시가 만나 만들어내는 극적인 질감의 테이블.<br>실패를 감수하고도 완성해내는 그 과정에 완전히 빠져들었다.</p>
+
+        <p>2년을 독학했다.<br>추운 겨울도, 더운 여름도 나무를 만졌다.<br>차이는 명확했다.</p>
+
+        <p>의무로는 절대 나오지 않는 "스스로 공부하는 기쁨"이 손끝에서 흘러나왔다.</p>
+
+        <p>39세, 안정을 내려놓았다. 9월, A19 Studio는 화려한 스토리나 유행이 아닌 오직 "실력"으로 말한다.<br>고객이 가구를 마주하는 순간 믿을 수 있는 완성도, 그거면 충분하다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 강점 -->
+  <section class="values">
+    <span class="kicker">What We Stand For</span>
+    <h2 class="section-title">A19 Studio의 가치</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-number">01</span>
+        <h3>맞춤형 디자인</h3>
+        <p>특정 수종이나 마감을 고집하지 않습니다.<br>공간과 쓰임에 맞춰 매번 새롭게 디자인합니다.</p>
+        <div class="value-quote">상황에 맞게, 작품에 맞게 —<br>그게 A19 Studio가 디자인하는 방식이다.</div>
+      </div>
+
+      <div class="value-card">
+        <span class="value-number">02</span>
+        <h3>기능성과 신뢰성</h3>
+        <p>아무리 예쁜 디자인도 불편하면 소용없습니다.<br>기능이 완벽해야 비로소 가구입니다.</p>
+        <div class="value-quote">가구로서의 역할은 타협할 수 없는 기본이다.<br>값을 지불하고 받는 순간, 믿고 오래 쓸 수 있는 완성도여야 한다.</div>
+      </div>
+
+      <div class="value-card">
+        <span class="value-number">03</span>
+        <h3>본질을 향한 신념</h3>
+        <p>유행과 상술이 아닌, 오직 실력으로만 평가받겠다는 각오.<br>그것이 A19 Studio의 정체성입니다.</p>
+        <div class="value-quote">지금이든 10년, 20년 뒤든,<br>결국 중요한 건 하나 — 실력이다.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 문의하기 -->
+  <section class="inquiry">
+    <div class="inquiry-inner">
+      <span class="kicker">Private Inquiry</span>
+      <h2 class="section-title">문의하기</h2>
+      <p style="color: var(--muted); font-size: 0.92rem; margin-top: 0.8rem;">남겨주신 내용은 대표님에게만 전달됩니다.<br>다른 방문자에게는 공개되지 않습니다.</p>
+
+      <form name="inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="inquiry-form" id="inquiry-form">
+        <input type="hidden" name="form-name" value="inquiry" />
+        <p class="hidden-field">
+          <label>비워두세요: <input name="bot-field" /></label>
+        </p>
+        <input type="text" name="name" placeholder="이름" required>
+        <input type="text" name="contact" placeholder="연락처 (전화번호 또는 인스타 아이디)" required>
+        <textarea name="message" placeholder="문의 내용을 남겨주세요" required></textarea>
+        <button type="submit" class="btn btn-dark">문의 남기기</button>
+        <p class="inquiry-success" id="inquiry-success">문의가 전달되었습니다. 빠르게 답변드리겠습니다.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 연락처 -->
+  <section class="contact">
+    <div class="contact-content">
+      <span class="kicker" style="color:#999;">Get in Touch</span>
+      <h2>주문 · 문의</h2>
+      <p>당신의 공간에 어울리는 맞춤 가구를 만들어드립니다.<br>편하게 연락주세요.</p>
+      <div class="contact-buttons">
+        <a href="https://www.instagram.com/a19_studio_0819" class="btn btn-primary" target="_blank">인스타그램 방문</a>
+        <a href="https://www.instagram.com/a19_studio_0819" class="btn btn-secondary" target="_blank">DM으로 문의</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 A19 STUDIO. All rights reserved.</span>
+      <span class="footer-links">
+        <a href="https://www.instagram.com/a19_studio_0819" target="_blank">Instagram</a>
+        <a href="/admin/">관리자</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // 대표 작품 렌더링 (content/gallery.json)
+    fetch('content/gallery.json')
+      .then(res => res.json())
+      .then(data => {
+        const grid = document.getElementById('gallery-grid');
+        grid.innerHTML = data.items.map((item, i) => `
+          <div class="gallery-item">
+            <div class="gallery-image" style="background-color: ${item.image ? 'transparent' : (item.color || '#E8DCC8')};">
+              <span class="gallery-index">${String(i + 1).padStart(2, '0')}</span>
+              ${item.image
+                ? `<img src="${item.image}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">`
+                : `<span class="gallery-icon">${item.icon || '🪵'}</span>`}
+            </div>
+            <div class="gallery-content">
+              <h3 class="gallery-title">${item.title}</h3>
+              <p class="gallery-desc">${(item.desc || '').replace(/\n/g, '<br>')}</p>
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('gallery-grid').innerHTML = '<p style="padding:2rem;color:var(--muted);">작품을 불러오지 못했습니다.</p>';
+      });
+
+    // 공지사항 렌더링 (content/notices.json)
+    fetch('content/notices.json')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('notices-list');
+        const items = (data.items || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+        if (!items.length) {
+          list.innerHTML = '<p class="notices-empty">등록된 공지사항이 없습니다.</p>';
+          return;
+        }
+        list.innerHTML = items.map(item => `
+          <div class="notice-item">
+            <div class="notice-main">
+              <div class="notice-title">${item.title}</div>
+              <div class="notice-body">${(item.body || '').replace(/\n/g, '<br>')}</div>
+            </div>
+            <div class="notice-date">${item.date || ''}</div>
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('notices-list').innerHTML = '<p class="notices-empty">공지사항을 불러오지 못했습니다.</p>';
+      });
+
+    // 문의 폼: 페이지 이동 없이 제출
+    const inquiryForm = document.getElementById('inquiry-form');
+    if (inquiryForm) {
+      inquiryForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(inquiryForm);
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString(),
+        })
+          .then(() => {
+            inquiryForm.reset();
+            document.getElementById('inquiry-success').style.display = 'block';
+          })
+          .catch(() => {
+            alert('전송에 실패했습니다. 인스타그램 DM으로도 문의해주세요.');
+          });
+      });
+    }
+  </script>
+
+</body>
+</html>
