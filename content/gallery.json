@@ -1,9 +1,9 @@
 {
   "items": [
     {
-      "title": "모듈식 선반",
+      "title": "길이각도 조절 선반",
       "desc": "조절 가능한 각도와 길이, 색감 포인트가 있는 수납장.\n공간에 맞춰 자유롭게 구성할 수 있습니다.",
-      "images": [],
+      "images": ["/images/uploads/kakaotalk_20260707_155946795_01.png", "/images/uploads/kakaotalk_20260707_155946795_02.png", "/images/uploads/kakaotalk_20260707_155946795_03.png"],
       "color": "#E8DCC8",
       "icon": "📦"
     },
