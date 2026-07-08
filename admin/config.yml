@@ -20,11 +20,12 @@ collections:
             fields:
               - {label: "제목", name: "title", widget: "string"}
               - {label: "설명", name: "desc", widget: "text"}
-              - label: "사진 (여러 장 가능)"
+              - label: "사진 (여러 장 한번에 선택 가능)"
                 name: "images"
-                widget: "list"
+                widget: "image"
+                multiple: true
                 required: false
-                field: {label: "사진", name: "image", widget: "image"}
+                media_library: {config: {multiple: true}}
 
   - name: "notices"
     label: "공지사항"
