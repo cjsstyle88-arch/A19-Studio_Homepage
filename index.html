@@ -468,6 +468,76 @@
       left: -9999px;
     }
 
+    .dropzone {
+      border: 1px dashed var(--line);
+      background-color: var(--paper);
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .dropzone.dragover {
+      border-color: var(--orange);
+      background-color: var(--cream);
+    }
+
+    .dropzone-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .dropzone-text strong {
+      color: var(--ink);
+    }
+
+    .dropzone-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .dropzone-preview:empty {
+      margin-top: 0;
+    }
+
+    .dropzone-thumb {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      border: 1px solid var(--line);
+    }
+
+    .dropzone-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .dropzone-thumb .file-name {
+      font-size: 0.65rem;
+      color: var(--muted);
+      padding: 0.3rem;
+      word-break: break-all;
+    }
+
+    .dropzone-thumb .remove-file {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 20px;
+      height: 20px;
+      background-color: var(--ink);
+      color: var(--paper);
+      border: none;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
     /* ===== 주문 제작 발주 섹션 ===== */
     .order {
       max-width: 1280px;
@@ -693,7 +763,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#gallery">대표 작품</a>
+          <a class="nav-link" href="#gallery">포트폴리오</a>
           <div class="nav-dropdown" id="nav-gallery-dropdown">
             <span class="nav-dropdown-empty">불러오는 중...</span>
           </div>
@@ -785,8 +855,8 @@
 
   <!-- 갤러리 -->
   <div class="section-head">
-    <h2 class="section-title">대표 작품</h2>
-    <span class="section-note">Selected Works</span>
+    <h2 class="section-title">포트폴리오</h2>
+    <span class="section-note">Portfolio</span>
   </div>
   <section class="gallery" id="gallery">
     <div class="gallery-grid" id="gallery-grid">
@@ -803,7 +873,7 @@
     <div class="order-inner">
       <p style="color: var(--muted); font-size: 0.92rem; max-width: 560px;">원하시는 가구를 자유롭게 요청해주세요.<br>사이즈나 예산이 아직 정해지지 않았어도 괜찮습니다.</p>
 
-      <form name="order-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="order-form" id="order-form">
+      <form name="order-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="order-form" id="order-form">
         <input type="hidden" name="form-name" value="order-request" />
         <p class="hidden-field">
           <label>비워두세요: <input name="bot-field" /></label>
@@ -827,7 +897,14 @@
           <option value="협의">협의</option>
         </select>
         <input type="text" name="dimensions" placeholder="희망 치수 (선택, 모르면 비워두세요)">
-        <textarea name="detail" placeholder="원하시는 스타일, 용도, 참고 이미지 등 자유롭게 적어주세요" required></textarea>
+        <textarea name="detail" placeholder="원하시는 스타일, 용도 등 자유롭게 적어주세요" required></textarea>
+
+        <div class="dropzone" id="order-dropzone">
+          <input type="file" name="reference_images" id="order-file-input" accept="image/*" multiple style="display:none">
+          <div class="dropzone-text" id="order-dropzone-text"><strong>참고 이미지</strong>를 여기로 끌어다 놓거나 클릭해서 선택하세요 (선택 사항)</div>
+          <div class="dropzone-preview" id="order-file-preview"></div>
+        </div>
+
         <button type="submit" class="btn btn-dark">주문 요청 보내기</button>
         <p class="inquiry-success" id="order-success">주문 요청이 접수되었습니다. 확인 후 빠르게 연락드리겠습니다.</p>
       </form>
@@ -880,7 +957,7 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <script>
-    // 대표 작품 렌더링 (content/gallery.json)
+    // 포트폴리오 렌더링 (content/gallery.json)
     fetch('content/gallery.json')
       .then(res => res.json())
       .then(data => {
@@ -951,8 +1028,8 @@
         document.getElementById('notices-list').innerHTML = '<p class="notices-empty">공지사항을 불러오지 못했습니다.</p>';
       });
 
-    // Netlify 폼: 페이지 이동 없이 제출
-    function bindNetlifyForm(formId, successId) {
+    // Netlify 폼: 페이지 이동 없이 제출 (파일 첨부 지원을 위해 FormData 그대로 전송)
+    function bindNetlifyForm(formId, successId, onReset) {
       const form = document.getElementById(formId);
       if (!form) return;
       form.addEventListener('submit', (e) => {
@@ -960,11 +1037,11 @@
         const formData = new FormData(form);
         fetch('/', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString(),
+          body: formData,
         })
           .then(() => {
             form.reset();
+            if (onReset) onReset();
             document.getElementById(successId).style.display = 'block';
           })
           .catch(() => {
@@ -974,7 +1051,70 @@
     }
 
     bindNetlifyForm('inquiry-form', 'inquiry-success');
-    bindNetlifyForm('order-form', 'order-success');
+
+    // 주문 요청 폼: 참고 이미지 드래그 앤 드롭 첨부
+    let orderSelectedFiles = [];
+    const orderDropzone = document.getElementById('order-dropzone');
+    const orderFileInput = document.getElementById('order-file-input');
+    const orderFilePreview = document.getElementById('order-file-preview');
+
+    function renderOrderFilePreview() {
+      if (!orderFilePreview) return;
+      orderFilePreview.innerHTML = orderSelectedFiles.map((file, i) => `
+        <div class="dropzone-thumb">
+          <img src="${URL.createObjectURL(file)}" alt="${file.name}">
+          <button type="button" class="remove-file" data-index="${i}" aria-label="삭제">×</button>
+        </div>
+      `).join('');
+
+      orderFilePreview.querySelectorAll('.remove-file').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          orderSelectedFiles.splice(parseInt(btn.dataset.index, 10), 1);
+          syncOrderFileInput();
+          renderOrderFilePreview();
+        });
+      });
+    }
+
+    function syncOrderFileInput() {
+      const dt = new DataTransfer();
+      orderSelectedFiles.forEach(file => dt.items.add(file));
+      orderFileInput.files = dt.files;
+    }
+
+    function addOrderFiles(fileList) {
+      Array.from(fileList).forEach(file => {
+        if (file.type.startsWith('image/')) orderSelectedFiles.push(file);
+      });
+      syncOrderFileInput();
+      renderOrderFilePreview();
+    }
+
+    if (orderDropzone && orderFileInput) {
+      document.getElementById('order-dropzone-text').addEventListener('click', () => orderFileInput.click());
+      orderFileInput.addEventListener('change', (e) => addOrderFiles(e.target.files));
+
+      ['dragover', 'dragenter'].forEach(evt => {
+        orderDropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          orderDropzone.classList.add('dragover');
+        });
+      });
+      ['dragleave', 'dragend'].forEach(evt => {
+        orderDropzone.addEventListener(evt, () => orderDropzone.classList.remove('dragover'));
+      });
+      orderDropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        orderDropzone.classList.remove('dragover');
+        addOrderFiles(e.dataTransfer.files);
+      });
+    }
+
+    bindNetlifyForm('order-form', 'order-success', () => {
+      orderSelectedFiles = [];
+      renderOrderFilePreview();
+    });
   </script>
 
 </body>
