@@ -78,6 +78,77 @@
       color: var(--muted);
     }
 
+    /* ===== 네비게이션 바 ===== */
+    .nav-bar {
+      border-top: 1px solid var(--line);
+    }
+
+    .nav-list {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 0.85rem 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .nav-item:hover .nav-link {
+      border-color: var(--orange);
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 240px;
+      background-color: var(--paper);
+      border: 1px solid var(--line);
+      padding: 0.4rem 0;
+      display: none;
+      z-index: 200;
+    }
+
+    .nav-item:hover .nav-dropdown {
+      display: block;
+    }
+
+    .nav-dropdown a {
+      display: block;
+      padding: 0.65rem 1.2rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-dropdown a:hover {
+      background-color: var(--cream);
+      color: var(--ink);
+    }
+
+    .nav-dropdown-empty {
+      padding: 0.65rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
     /* ===== 히어로 섹션 ===== */
     .hero {
       max-width: 1280px;
@@ -536,6 +607,16 @@
         padding: 1.1rem 1.2rem;
       }
 
+      .nav-list {
+        padding: 0 1.2rem;
+        gap: 1.2rem;
+        overflow-x: auto;
+      }
+
+      .nav-dropdown {
+        display: none !important;
+      }
+
       .hero {
         padding: 3.5rem 1.2rem 3rem;
       }
@@ -584,6 +665,39 @@
       <div class="brand-name">A19 STUDIO</div>
       <div class="brand-tagline">실력으로 말하는 원목 수제 가구</div>
     </div>
+    <nav class="nav-bar">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a class="nav-link" href="#gallery">대표 작품</a>
+          <div class="nav-dropdown" id="nav-gallery-dropdown">
+            <span class="nav-dropdown-empty">불러오는 중...</span>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#story">작가 이야기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#values">가치</a>
+          <div class="nav-dropdown">
+            <a href="#value-01">맞춤형 디자인</a>
+            <a href="#value-02">기능성과 신뢰성</a>
+            <a href="#value-03">본질을 향한 신념</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#notices">공지사항</a>
+          <div class="nav-dropdown" id="nav-notices-dropdown">
+            <span class="nav-dropdown-empty">불러오는 중...</span>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#inquiry">문의하기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">연락처</a>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <!-- 히어로 섹션 -->
@@ -600,7 +714,7 @@
     <h2 class="section-title">대표 작품</h2>
     <span class="section-note">Selected Works</span>
   </div>
-  <section class="gallery">
+  <section class="gallery" id="gallery">
     <div class="gallery-grid" id="gallery-grid">
       <!-- content/gallery.json 에서 자동으로 채워집니다 -->
     </div>
@@ -611,14 +725,14 @@
     <h2 class="section-title">공지사항</h2>
     <span class="section-note">Notice</span>
   </div>
-  <section class="notices">
+  <section class="notices" id="notices">
     <div class="notices-list" id="notices-list">
       <!-- content/notices.json 에서 자동으로 채워집니다 -->
     </div>
   </section>
 
   <!-- 작가 이야기 -->
-  <section class="about">
+  <section class="about" id="story">
     <div class="about-content">
       <div>
         <span class="kicker">Our Story</span>
@@ -639,25 +753,25 @@
   </section>
 
   <!-- 강점 -->
-  <section class="values">
+  <section class="values" id="values">
     <span class="kicker">What We Stand For</span>
     <h2 class="section-title">A19 Studio의 가치</h2>
     <div class="values-grid">
-      <div class="value-card">
+      <div class="value-card" id="value-01">
         <span class="value-number">01</span>
         <h3>맞춤형 디자인</h3>
         <p>특정 수종이나 마감을 고집하지 않습니다.<br>공간과 쓰임에 맞춰 매번 새롭게 디자인합니다.</p>
         <div class="value-quote">상황에 맞게, 작품에 맞게 —<br>그게 A19 Studio가 디자인하는 방식이다.</div>
       </div>
 
-      <div class="value-card">
+      <div class="value-card" id="value-02">
         <span class="value-number">02</span>
         <h3>기능성과 신뢰성</h3>
         <p>아무리 예쁜 디자인도 불편하면 소용없습니다.<br>기능이 완벽해야 비로소 가구입니다.</p>
         <div class="value-quote">가구로서의 역할은 타협할 수 없는 기본이다.<br>값을 지불하고 받는 순간, 믿고 오래 쓸 수 있는 완성도여야 한다.</div>
       </div>
 
-      <div class="value-card">
+      <div class="value-card" id="value-03">
         <span class="value-number">03</span>
         <h3>본질을 향한 신념</h3>
         <p>유행과 상술이 아닌, 오직 실력으로만 평가받겠다는 각오.<br>그것이 A19 Studio의 정체성입니다.</p>
@@ -667,7 +781,7 @@
   </section>
 
   <!-- 문의하기 -->
-  <section class="inquiry">
+  <section class="inquiry" id="inquiry">
     <div class="inquiry-inner">
       <span class="kicker">Private Inquiry</span>
       <h2 class="section-title">문의하기</h2>
@@ -688,7 +802,7 @@
   </section>
 
   <!-- 연락처 -->
-  <section class="contact">
+  <section class="contact" id="contact">
     <div class="contact-content">
       <span class="kicker" style="color:#999;">Get in Touch</span>
       <h2>주문 · 문의</h2>
@@ -723,7 +837,7 @@
           const images = (item.images && item.images.length) ? item.images : (item.image ? [item.image] : []);
           const hasImages = images.length > 0;
           return `
-          <div class="gallery-item">
+          <div class="gallery-item" id="gallery-item-${i}">
             <div class="gallery-image" data-images='${JSON.stringify(images)}' data-index="0" style="background-color: ${hasImages ? 'transparent' : (item.color || '#E8DCC8')}; cursor:${images.length > 1 ? 'pointer' : 'default'};">
               <span class="gallery-index">${String(i + 1).padStart(2, '0')}</span>
               ${hasImages
@@ -750,9 +864,15 @@
             });
           }
         });
+
+        const navGallery = document.getElementById('nav-gallery-dropdown');
+        navGallery.innerHTML = data.items.length
+          ? data.items.map((item, i) => `<a href="#gallery-item-${i}">${item.title}</a>`).join('')
+          : '<span class="nav-dropdown-empty">등록된 작품이 없습니다</span>';
       })
       .catch(() => {
         document.getElementById('gallery-grid').innerHTML = '<p style="padding:2rem;color:var(--muted);">작품을 불러오지 못했습니다.</p>';
+        document.getElementById('nav-gallery-dropdown').innerHTML = '<span class="nav-dropdown-empty">불러오지 못했습니다</span>';
       });
 
     // 공지사항 렌더링 (content/notices.json)
@@ -761,12 +881,14 @@
       .then(data => {
         const list = document.getElementById('notices-list');
         const items = (data.items || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+        const navNotices = document.getElementById('nav-notices-dropdown');
         if (!items.length) {
           list.innerHTML = '<p class="notices-empty">등록된 공지사항이 없습니다.</p>';
+          navNotices.innerHTML = '<span class="nav-dropdown-empty">등록된 공지가 없습니다</span>';
           return;
         }
-        list.innerHTML = items.map(item => `
-          <div class="notice-item">
+        list.innerHTML = items.map((item, i) => `
+          <div class="notice-item" id="notice-item-${i}">
             <div class="notice-main">
               <div class="notice-title">${item.title}</div>
               <div class="notice-body">${(item.body || '').replace(/\n/g, '<br>')}</div>
@@ -774,9 +896,12 @@
             <div class="notice-date">${item.date || ''}</div>
           </div>
         `).join('');
+
+        navNotices.innerHTML = items.slice(0, 5).map((item, i) => `<a href="#notice-item-${i}">${item.title}</a>`).join('');
       })
       .catch(() => {
         document.getElementById('notices-list').innerHTML = '<p class="notices-empty">공지사항을 불러오지 못했습니다.</p>';
+        document.getElementById('nav-notices-dropdown').innerHTML = '<span class="nav-dropdown-empty">불러오지 못했습니다</span>';
       });
 
     // 문의 폼: 페이지 이동 없이 제출
