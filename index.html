@@ -764,9 +764,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#gallery">포트폴리오</a>
-          <div class="nav-dropdown" id="nav-gallery-dropdown">
-            <span class="nav-dropdown-empty">불러오는 중...</span>
-          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#order">주문 제작 발주</a>
@@ -993,15 +990,9 @@
             });
           }
         });
-
-        const navGallery = document.getElementById('nav-gallery-dropdown');
-        navGallery.innerHTML = data.items.length
-          ? data.items.map((item, i) => `<a href="#gallery-item-${i}">${item.title}</a>`).join('')
-          : '<span class="nav-dropdown-empty">등록된 작품이 없습니다</span>';
       })
       .catch(() => {
         document.getElementById('gallery-grid').innerHTML = '<p style="padding:2rem;color:var(--muted);">작품을 불러오지 못했습니다.</p>';
-        document.getElementById('nav-gallery-dropdown').innerHTML = '<span class="nav-dropdown-empty">불러오지 못했습니다</span>';
       });
 
     // 공지사항 렌더링 (content/notices.json)
