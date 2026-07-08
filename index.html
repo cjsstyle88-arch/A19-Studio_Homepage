@@ -434,7 +434,8 @@
       margin: 0 auto;
     }
 
-    .inquiry-form {
+    .inquiry-form,
+    .order-form {
       max-width: 560px;
       display: flex;
       flex-direction: column;
@@ -443,7 +444,10 @@
     }
 
     .inquiry-form input,
-    .inquiry-form textarea {
+    .inquiry-form textarea,
+    .order-form input,
+    .order-form select,
+    .order-form textarea {
       border: 1px solid var(--line);
       background-color: var(--paper);
       color: var(--ink);
@@ -452,14 +456,27 @@
       font-family: inherit;
     }
 
-    .inquiry-form textarea {
+    .inquiry-form textarea,
+    .order-form textarea {
       min-height: 140px;
       resize: vertical;
     }
 
-    .inquiry-form .hidden-field {
+    .inquiry-form .hidden-field,
+    .order-form .hidden-field {
       position: absolute;
       left: -9999px;
+    }
+
+    /* ===== 주문 제작 발주 섹션 ===== */
+    .order {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .order-inner {
+      max-width: 1280px;
     }
 
     .btn-dark {
@@ -668,33 +685,28 @@
     <nav class="nav-bar">
       <ul class="nav-list">
         <li class="nav-item">
+          <a class="nav-link" href="#story">소개</a>
+          <div class="nav-dropdown">
+            <a href="#story">작가 이야기</a>
+            <a href="#values">가치</a>
+            <a href="#contact">공방 주소 및 연락처</a>
+          </div>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="#gallery">대표 작품</a>
           <div class="nav-dropdown" id="nav-gallery-dropdown">
             <span class="nav-dropdown-empty">불러오는 중...</span>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#story">작가 이야기</a>
+          <a class="nav-link" href="#order">주문 제작 발주</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#values">가치</a>
+          <a class="nav-link" href="#notices">게시판</a>
           <div class="nav-dropdown">
-            <a href="#value-01">맞춤형 디자인</a>
-            <a href="#value-02">기능성과 신뢰성</a>
-            <a href="#value-03">본질을 향한 신념</a>
+            <a href="#notices">공지사항</a>
+            <a href="#inquiry">문의하기</a>
           </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#notices">공지사항</a>
-          <div class="nav-dropdown" id="nav-notices-dropdown">
-            <span class="nav-dropdown-empty">불러오는 중...</span>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#inquiry">문의하기</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">연락처</a>
         </li>
       </ul>
     </nav>
@@ -706,28 +718,6 @@
       <span class="kicker">A19 Studio — Custom Woodwork</span>
       <h1>안정 대신 몰입을 택하고,<br>나무 속에서 오직 '<span class="hero-accent">실력</span>'이라는 본질만을 좇는 가구 브랜드</h1>
       <p>화려한 스토리나 유행이 아닌, 오직 <strong>만든 것</strong>으로만 말한다.</p>
-    </div>
-  </section>
-
-  <!-- 갤러리 -->
-  <div class="section-head">
-    <h2 class="section-title">대표 작품</h2>
-    <span class="section-note">Selected Works</span>
-  </div>
-  <section class="gallery" id="gallery">
-    <div class="gallery-grid" id="gallery-grid">
-      <!-- content/gallery.json 에서 자동으로 채워집니다 -->
-    </div>
-  </section>
-
-  <!-- 공지사항 -->
-  <div class="section-head">
-    <h2 class="section-title">공지사항</h2>
-    <span class="section-note">Notice</span>
-  </div>
-  <section class="notices" id="notices">
-    <div class="notices-list" id="notices-list">
-      <!-- content/notices.json 에서 자동으로 채워집니다 -->
     </div>
   </section>
 
@@ -780,6 +770,81 @@
     </div>
   </section>
 
+  <!-- 연락처 -->
+  <section class="contact" id="contact">
+    <div class="contact-content">
+      <span class="kicker" style="color:#999;">Get in Touch</span>
+      <h2>연락처</h2>
+      <p>공방 소식과 연락은 인스타그램에서 가장 빠르게 확인하실 수 있습니다.<br>편하게 방문해주세요.</p>
+      <div class="contact-buttons">
+        <a href="https://www.instagram.com/a19_studio_0819" class="btn btn-primary" target="_blank">인스타그램 방문</a>
+        <a href="https://www.instagram.com/a19_studio_0819" class="btn btn-secondary" target="_blank">DM으로 문의</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 갤러리 -->
+  <div class="section-head">
+    <h2 class="section-title">대표 작품</h2>
+    <span class="section-note">Selected Works</span>
+  </div>
+  <section class="gallery" id="gallery">
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- content/gallery.json 에서 자동으로 채워집니다 -->
+    </div>
+  </section>
+
+  <!-- 주문 제작 발주 -->
+  <div class="section-head">
+    <h2 class="section-title">주문 제작 발주</h2>
+    <span class="section-note">Custom Order</span>
+  </div>
+  <section class="order" id="order">
+    <div class="order-inner">
+      <p style="color: var(--muted); font-size: 0.92rem; max-width: 560px;">원하시는 가구를 자유롭게 요청해주세요.<br>사이즈나 예산이 아직 정해지지 않았어도 괜찮습니다.</p>
+
+      <form name="order-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="order-form" id="order-form">
+        <input type="hidden" name="form-name" value="order-request" />
+        <p class="hidden-field">
+          <label>비워두세요: <input name="bot-field" /></label>
+        </p>
+        <input type="text" name="name" placeholder="이름" required>
+        <input type="text" name="contact" placeholder="연락처 (전화번호 또는 인스타 아이디)" required>
+        <select name="category" required>
+          <option value="">원하는 가구 종류</option>
+          <option value="테이블">테이블</option>
+          <option value="선반">선반</option>
+          <option value="의자 · 스툴">의자 · 스툴</option>
+          <option value="콘솔">콘솔</option>
+          <option value="기타">기타</option>
+        </select>
+        <select name="budget">
+          <option value="">예산대 (선택)</option>
+          <option value="50만원 이하">50만원 이하</option>
+          <option value="50~100만원">50~100만원</option>
+          <option value="100~200만원">100~200만원</option>
+          <option value="200만원 이상">200만원 이상</option>
+          <option value="협의">협의</option>
+        </select>
+        <input type="text" name="dimensions" placeholder="희망 치수 (선택, 모르면 비워두세요)">
+        <textarea name="detail" placeholder="원하시는 스타일, 용도, 참고 이미지 등 자유롭게 적어주세요" required></textarea>
+        <button type="submit" class="btn btn-dark">주문 요청 보내기</button>
+        <p class="inquiry-success" id="order-success">주문 요청이 접수되었습니다. 확인 후 빠르게 연락드리겠습니다.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 공지사항 -->
+  <div class="section-head">
+    <h2 class="section-title">공지사항</h2>
+    <span class="section-note">Notice</span>
+  </div>
+  <section class="notices" id="notices">
+    <div class="notices-list" id="notices-list">
+      <!-- content/notices.json 에서 자동으로 채워집니다 -->
+    </div>
+  </section>
+
   <!-- 문의하기 -->
   <section class="inquiry" id="inquiry">
     <div class="inquiry-inner">
@@ -798,19 +863,6 @@
         <button type="submit" class="btn btn-dark">문의 남기기</button>
         <p class="inquiry-success" id="inquiry-success">문의가 전달되었습니다. 빠르게 답변드리겠습니다.</p>
       </form>
-    </div>
-  </section>
-
-  <!-- 연락처 -->
-  <section class="contact" id="contact">
-    <div class="contact-content">
-      <span class="kicker" style="color:#999;">Get in Touch</span>
-      <h2>주문 · 문의</h2>
-      <p>당신의 공간에 어울리는 맞춤 가구를 만들어드립니다.<br>편하게 연락주세요.</p>
-      <div class="contact-buttons">
-        <a href="https://www.instagram.com/a19_studio_0819" class="btn btn-primary" target="_blank">인스타그램 방문</a>
-        <a href="https://www.instagram.com/a19_studio_0819" class="btn btn-secondary" target="_blank">DM으로 문의</a>
-      </div>
     </div>
   </section>
 
@@ -881,10 +933,8 @@
       .then(data => {
         const list = document.getElementById('notices-list');
         const items = (data.items || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
-        const navNotices = document.getElementById('nav-notices-dropdown');
         if (!items.length) {
           list.innerHTML = '<p class="notices-empty">등록된 공지사항이 없습니다.</p>';
-          navNotices.innerHTML = '<span class="nav-dropdown-empty">등록된 공지가 없습니다</span>';
           return;
         }
         list.innerHTML = items.map((item, i) => `
@@ -896,34 +946,35 @@
             <div class="notice-date">${item.date || ''}</div>
           </div>
         `).join('');
-
-        navNotices.innerHTML = items.slice(0, 5).map((item, i) => `<a href="#notice-item-${i}">${item.title}</a>`).join('');
       })
       .catch(() => {
         document.getElementById('notices-list').innerHTML = '<p class="notices-empty">공지사항을 불러오지 못했습니다.</p>';
-        document.getElementById('nav-notices-dropdown').innerHTML = '<span class="nav-dropdown-empty">불러오지 못했습니다</span>';
       });
 
-    // 문의 폼: 페이지 이동 없이 제출
-    const inquiryForm = document.getElementById('inquiry-form');
-    if (inquiryForm) {
-      inquiryForm.addEventListener('submit', (e) => {
+    // Netlify 폼: 페이지 이동 없이 제출
+    function bindNetlifyForm(formId, successId) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const formData = new FormData(inquiryForm);
+        const formData = new FormData(form);
         fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(formData).toString(),
         })
           .then(() => {
-            inquiryForm.reset();
-            document.getElementById('inquiry-success').style.display = 'block';
+            form.reset();
+            document.getElementById(successId).style.display = 'block';
           })
           .catch(() => {
             alert('전송에 실패했습니다. 인스타그램 DM으로도 문의해주세요.');
           });
       });
     }
+
+    bindNetlifyForm('inquiry-form', 'inquiry-success');
+    bindNetlifyForm('order-form', 'order-success');
   </script>
 
 </body>
