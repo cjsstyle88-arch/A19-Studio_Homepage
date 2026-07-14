@@ -317,6 +317,84 @@
       margin-bottom: 0;
     }
 
+    /* ===== 훈련 기록 섹션 ===== */
+    .training-log {
+      background-color: var(--paper);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 5rem 2rem;
+    }
+
+    .training-log-content {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .training-list {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .training-list .section-title {
+      padding: 0;
+    }
+
+    .training-items {
+      border-left: 2px solid var(--orange);
+      padding-left: 2rem;
+    }
+
+    .training-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .training-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .training-item::before {
+      content: '';
+      position: absolute;
+      left: -2.75rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--orange);
+      border: 2px solid var(--paper);
+    }
+
+    .training-period {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.6rem;
+    }
+
+    .training-place {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .training-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
     /* ===== 강점 섹션 ===== */
     .values {
       max-width: 1280px;
@@ -805,6 +883,34 @@
         <p>의무로는 절대 나오지 않는 "스스로 공부하는 기쁨"이 손끝에서 흘러나왔다.</p>
 
         <p>39세, 안정을 내려놓았다. 9월, A19 Studio는 화려한 스토리나 유행이 아닌 오직 "실력"으로 말한다.<br>고객이 가구를 마주하는 순간 믿을 수 있는 완성도, 그거면 충분하다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 훈련 기록 -->
+  <section class="training-log" id="training-log">
+    <div class="training-log-content">
+      <div class="training-list">
+        <div>
+          <span class="kicker">Training History</span>
+          <h2 class="section-title">훈련 기록</h2>
+        </div>
+      </div>
+      <div class="training-items">
+        <div class="training-item">
+          <span class="training-period">2024.01 ~ 2026.02</span>
+          <div class="training-info">
+            <h3 class="training-place">솔향 원목 맞춤 제작소</h3>
+            <p class="training-desc">가구제작 수련</p>
+          </div>
+        </div>
+        <div class="training-item">
+          <span class="training-period">2026.03 ~ 2026.08</span>
+          <div class="training-info">
+            <h3 class="training-place">바오밥목공전문학원</h3>
+            <p class="training-desc">PBL기반 고객맞춤형&디지털가구설계제작과정</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
