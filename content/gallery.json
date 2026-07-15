@@ -32,7 +32,9 @@
     {
       "title": "낮은 스툴",
       "desc": "심플하면서도 기능적인 개별 좌석.\n어느 공간에나 자연스럽게 어울립니다.",
-      "images": [],
+      "images": [
+        "/images/uploads/kakaotalk_20260714_154237606_01.png"
+      ],
       "color": "#D8CAB8",
       "icon": "⚙️"
     }
