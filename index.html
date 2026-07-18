@@ -212,6 +212,36 @@
       padding: 2.5rem 2rem 5rem;
     }
 
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.55rem 1.3rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      background-color: transparent;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--orange);
+      color: var(--ink);
+    }
+
+    .filter-btn.active {
+      background-color: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -962,6 +992,7 @@
     <span class="section-note">Portfolio</span>
   </div>
   <section class="gallery" id="gallery">
+    <div class="gallery-filters" id="gallery-filters"></div>
     <div class="gallery-grid" id="gallery-grid">
       <!-- content/gallery.json 에서 자동으로 채워집니다 -->
     </div>
@@ -1065,11 +1096,26 @@
       .then(res => res.json())
       .then(data => {
         const grid = document.getElementById('gallery-grid');
-        grid.innerHTML = data.items.map((item, i) => {
+        const filtersEl = document.getElementById('gallery-filters');
+        // CMS에서 새 작품은 배열 맨 뒤에 추가되므로, 뒤집어서 최신 작품이 먼저 보이게 함
+        const items = data.items.slice().reverse();
+
+        const categories = ['전체'];
+        items.forEach(item => {
+          if (item.category && !categories.includes(item.category)) categories.push(item.category);
+        });
+
+        if (filtersEl) {
+          filtersEl.innerHTML = categories.map((cat, i) => `
+            <button type="button" class="filter-btn${i === 0 ? ' active' : ''}" data-category="${cat}">${cat}</button>
+          `).join('');
+        }
+
+        grid.innerHTML = items.map((item, i) => {
           const images = (item.images && item.images.length) ? item.images : (item.image ? [item.image] : []);
           const hasImages = images.length > 0;
           return `
-          <div class="gallery-item" id="gallery-item-${i}">
+          <div class="gallery-item" id="gallery-item-${i}" data-category="${item.category || '기타'}">
             <div class="gallery-image" data-images='${JSON.stringify(images)}' data-index="0" style="background-color: ${hasImages ? 'transparent' : (item.color || '#E8DCC8')}; cursor:${images.length > 1 ? 'pointer' : 'default'};">
               <span class="gallery-index">${String(i + 1).padStart(2, '0')}</span>
               ${hasImages
@@ -1096,6 +1142,19 @@
             });
           }
         });
+
+        if (filtersEl) {
+          filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              const cat = btn.dataset.category;
+              grid.querySelectorAll('.gallery-item').forEach(el => {
+                el.style.display = (cat === '전체' || el.dataset.category === cat) ? '' : 'none';
+              });
+            });
+          });
+        }
       })
       .catch(() => {
         document.getElementById('gallery-grid').innerHTML = '<p style="padding:2rem;color:var(--muted);">작품을 불러오지 못했습니다.</p>';

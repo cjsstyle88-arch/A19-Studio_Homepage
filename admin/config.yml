@@ -20,6 +20,11 @@ collections:
             fields:
               - {label: "제목", name: "title", widget: "string"}
               - {label: "설명", name: "desc", widget: "text"}
+              - label: "카테고리"
+                name: "category"
+                widget: "select"
+                options: ["테이블", "선반", "의자 · 스툴", "콘솔", "기타"]
+                default: "기타"
               - label: "사진 (여러 장 한번에 선택 가능)"
                 name: "images"
                 widget: "image"

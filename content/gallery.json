@@ -9,7 +9,8 @@
         "/images/uploads/kakaotalk_20260707_155946795_03.png"
       ],
       "color": "#E8DCC8",
-      "icon": "📦"
+      "icon": "📦",
+      "category": "선반"
     },
     {
       "title": "한국식 낮은 테이블",
@@ -18,7 +19,8 @@
         "/images/uploads/kakaotalk_20260707_155946795.png"
       ],
       "color": "#C9B8A8",
-      "icon": "🪑"
+      "icon": "🪑",
+      "category": "테이블"
     },
     {
       "title": "콘솔 + 애기 책상",
@@ -27,7 +29,8 @@
         "/images/uploads/chatgpt-image-2026년-7월-15일-오후-03_54_14.png"
       ],
       "color": "#E0D5C8",
-      "icon": "🛏️"
+      "icon": "🛏️",
+      "category": "콘솔"
     },
     {
       "title": "낮은 스툴",
@@ -36,14 +39,16 @@
         "/images/uploads/kakaotalk_20260714_154237606_01.png"
       ],
       "color": "#D8CAB8",
-      "icon": "⚙️"
+      "icon": "⚙️",
+      "category": "의자 · 스툴"
     },
     {
       "title": "미니 선반",
       "desc": "아래칸은 작은 휴지통, 윗칸은 책을 넣기 위한 고객의 주문 제작품 입니다.\n체리나무 원목을 활용하여 제작하였습니다.",
       "images": [
         "/images/uploads/kakaotalk_20260718_233805369.png"
-      ]
+      ],
+      "category": "선반"
     }
   ]
 }
